@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres:11
+    ports:
+      - '5432:5432'
+    volumes: 
+      - 'db1:/var/lib/postgresql/data'
+      - './chinook_data.sql:/docker-entrypoint-initdb.d/chinook_data.sql'
+    environment:
+      POSTGRES_USER: vagrant
+      POSTGRES_PASSWORD: vagrant
+      POSTGRES_DB: chinook
+
+volumes:
+  db1:
