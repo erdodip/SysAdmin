@@ -1,0 +1,80 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+  wp1:
+    image: wordpress:5.6
+    ports:
+      - "10080:80"
+    restart: always
+    volumes:
+      - wp1_data:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: $user
+      WORDPRESS_DB_PASSWORD: $pass
+      WORDPRESS_DB_NAME: $name
+      # WORDPRESS_CONFIG_EXTRA: |-
+      #   define('WP_HOME', 'http://localhost:81');
+      #   define('WP_SITEURL', 'http://localhost:81');
+  # wp1:
+  #   image: wordpress:5.6
+  #   ports:
+  #     - "10080:80"
+  #   restart: always
+  #   volumes:
+  #     - wp1_data:/var/www/html
+  #   environment:
+  #     WORDPRESS_DB_HOST: sutidbvm.duckdns.org:3306
+  #     WORDPRESS_DB_USER: $DB_USER
+  #     WORDPRESS_DB_PASSWORD: $DB_PASS
+  #     WORDPRESS_DB_NAME: $DB_NAME
+  #     WORDPRESS_CONFIG_EXTRA: |-
+  #       define('WP_HOME', 'http://localhost:80');
+  #       define('WP_SITEURL', 'http://localhost:80');
+  # wp2:
+  #   image: wordpress:5.6
+  #   ports:
+  #     - "81:81"
+  #   restart: always
+  #   volumes:
+  #     - wp2_data:/var/www/html
+  #   environment:
+  #     WORDPRESS_DB_HOST: db:3306
+  #     WORDPRESS_DB_USER: admin
+  #     WORDPRESS_DB_PASSWORD: admin
+  #     WORDPRESS_DB_NAME: mydb
+  #     WORDPRESS_CONFIG_EXTRA: |-
+  #       define('WP_HOME', 'http://localhost:81');
+  #       define('WP_SITEURL', 'http://localhost:81');
+  # wp3:
+  #   image: wordpress:5.6
+  #   ports:
+  #     - "82:82"
+  #   restart: always
+  #   volumes:
+  #     - wp3_data:/var/www/html
+  #   environment:
+  #     WORDPRESS_DB_HOST: db:3306
+  #     WORDPRESS_DB_USER: admin
+  #     WORDPRESS_DB_PASSWORD: admin
+  #     WORDPRESS_DB_NAME: mydb
+  #     WORDPRESS_CONFIG_EXTRA: |-
+  #       define('WP_HOME', 'http://localhost:82');
+  #       define('WP_SITEURL', 'http://localhost:82');
+
+volumes:
+  db_data:
+  wp1_data:
+  # wp2_data:
+  # wp3_data:
