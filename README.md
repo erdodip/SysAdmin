@@ -4,4 +4,4 @@
 3. Docker Tomcat and Postgresql
 4. Docker and WordPress
 5. Docker and Load Balacing
-6. Shell and SQL
+6. Shell and SQL (Night-Owl contains simplier codes)
